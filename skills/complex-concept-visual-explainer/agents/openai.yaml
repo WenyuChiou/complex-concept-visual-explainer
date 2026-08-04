@@ -1,0 +1,4 @@
+interface:
+  display_name: "Complex Concept Visual Explainer"
+  short_description: "Turn complex systems into coherent visual explanations"
+  default_prompt: "Use $complex-concept-visual-explainer to design a clear overview-to-zoom visual explanation for this complex system."

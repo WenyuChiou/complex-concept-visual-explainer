@@ -1,0 +1,35 @@
+{
+  "skill_name": "complex-concept-visual-explainer",
+  "evals": [
+    {
+      "id": 1,
+      "eval_name": "hydrocnhs-reservoir-family",
+      "prompt": "Design an English visual family for a non-hydrology audience explaining a large watershed divided into smaller catchments, multiple reservoirs, and a downstream flow path. Zoom into one reservoir and compare a rule-based agent with an LLM-driven agent. Show that an upstream reservoir output becomes the next downstream reservoir input after routing, and identify the narrow interface where Gemma 4:12B could replace only the reservoir policy.",
+      "expected_output": "A coherent overview, decision zoom, cascade, and interface plan with upstream-to-downstream causality, sibling decision branches, and a clear separation between policy and HydroCNHS routing.",
+      "files": [],
+      "must_include": ["overview", "rule-based", "LLM-driven", "shared action", "routing", "feedback"],
+      "must_not_include": ["LLM performs routing", "every agent is an LLM"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 2,
+      "eval_name": "professor-facing-api-seam",
+      "prompt": "Redesign a professor-facing Reservoir API diagram for HydroCNHS. Keep the input and output contract fixed while comparing a rule-based policy with an Ollama Gemma 4:12B policy. It is acceptable to show release_cms, but do not add function calls or time-indexed arrays. Make it explicit that the interface is an in-process callback rather than a REST service.",
+      "expected_output": "A concise technical visual specification with a fixed observation/action contract, parallel policy choices, a validator boundary, and unchanged downstream routing.",
+      "files": [],
+      "must_include": ["fixed", "observation", "action", "rule-based", "Gemma 4:12B", "in-process callback", "validator", "routing"],
+      "must_not_include": ["REST service", "function call", "time-indexed array"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 3,
+      "eval_name": "consumer-behavior-adapter",
+      "prompt": "Explain a consumer-behavior system to people without a behavioral-science background. Use a market or social context, a focal consumer or household, observations and internal state, and two alternative decision mechanisms: explicit rules versus an LLM-driven policy. Show the purchase or action, outcome, and feedback. Do not use hydrological terminology.",
+      "expected_output": "A domain-adapted visual plan with context -> state -> observation -> sibling decision branches -> action -> outcome -> feedback, without invented hydrology assumptions.",
+      "files": [],
+      "must_include": ["context", "state", "observation", "rule-based", "LLM-driven", "action", "outcome", "feedback"],
+      "must_not_include": ["reservoir", "routing", "subbasin", "HydroCNHS"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
+    }
+  ]
+}
