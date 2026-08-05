@@ -1,0 +1,3 @@
+Future extension: operating manual -> RAG retriever -> policy context -> LLM-driven decision.
+This is knowledge support, not an agent, and it does not write the document into model weights.
+Keep RAG separate from the rule-based decision and apply deterministic validation to any action.

@@ -1,0 +1,3 @@
+Overview: context, subbasins, reservoirs, and downstream flow.
+Decision zoom: a rule-based alternative and an LLM-driven alternative share one structured action and shared action contract.
+Routing carries an upstream reservoir output to the next downstream input and creates feedback.

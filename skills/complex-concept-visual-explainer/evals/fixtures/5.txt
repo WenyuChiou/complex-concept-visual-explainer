@@ -1,0 +1,3 @@
+Use two lanes: EXISTING PATH above and LLM INTEGRATION PATH below.
+Each alternative contains an ABM AGENT and uses one shared interface.
+Mark the top path Existing, the lower path MVP, and the optional knowledge path Future extension.

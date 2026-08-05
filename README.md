@@ -32,12 +32,28 @@ agent's configured skills directory, preserving the directory name
 
 - Keep context, observation, decision, action, system transformation, output,
   and feedback visually distinct.
-- Show rule-based and LLM-driven policies as parallel alternatives.
+- Show rule-based and LLM-driven policies as parallel alternatives, using
+  separated lanes when comparing an existing path with an integration path.
+- Identify the actual ABM agent separately from its decision mechanism,
+  interface, validator, retriever, and deterministic model.
+- Mark implementation status explicitly as Existing, MVP, Future extension, or
+  Optional.
+- Represent document grounding as operating document -> retriever -> policy
+  context -> intended LLM decision branch.
 - Keep the LLM at the policy boundary; the deterministic model retains state
   transition, safety validation, and physical or system propagation.
 - Use plain-language labels for general audiences. Technical identifiers are
   allowed only when the domain adapter explicitly whitelists them.
 - Include concise alt text or a text equivalent for every generated visual.
+
+## Reference artifact
+
+The HydroCNHS example includes a two-lane professor-facing comparison showing
+the existing rule-based Dam Agent above the LLM integration path, with a shared
+reservoir decision interface and unchanged HydroCNHS routing:
+
+- [`two-lane-llm-integration.png`](examples/hydrocnhs/two-lane-llm-integration.png)
+- [`two-lane-llm-integration.md`](examples/hydrocnhs/two-lane-llm-integration.md)
 
 ## Repository layout
 
@@ -52,6 +68,12 @@ To run a text smoke test after generating an eval response:
 ```bash
 python skills/complex-concept-visual-explainer/evals/evaluate_outputs.py \
   skills/complex-concept-visual-explainer/evals/evals.json 1 output.txt
+```
+
+Run the complete dependency-free fixture suite with:
+
+```bash
+python skills/complex-concept-visual-explainer/evals/run_all.py
 ```
 
 The HydroCNHS research case, presentation, mock test, and generated visual

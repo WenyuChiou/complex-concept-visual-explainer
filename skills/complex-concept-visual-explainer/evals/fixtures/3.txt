@@ -1,0 +1,2 @@
+Use a market context, consumer state, and observation before sibling rule-based and LLM-driven decisions.
+The decision produces an action, an outcome, and feedback to the next interaction.
