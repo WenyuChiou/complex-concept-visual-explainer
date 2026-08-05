@@ -52,14 +52,16 @@ The HydroCNHS example includes a two-lane professor-facing comparison showing
 the existing rule-based Dam Agent above the LLM integration path, with a shared
 reservoir decision interface and unchanged HydroCNHS routing:
 
-- [`two-lane-llm-integration.png`](examples/hydrocnhs/two-lane-llm-integration.png)
-- [`two-lane-llm-integration.md`](examples/hydrocnhs/two-lane-llm-integration.md)
+- [`two-lane-llm-integration.png`](skills/complex-concept-visual-explainer/examples/hydrocnhs/two-lane-llm-integration.png)
+- [`two-lane-llm-integration.md`](skills/complex-concept-visual-explainer/examples/hydrocnhs/two-lane-llm-integration.md)
 
 ## Repository layout
 
 - `skills/complex-concept-visual-explainer/SKILL.md`: core instructions.
 - `skills/complex-concept-visual-explainer/references/`: design framework and
   domain adapters.
+- `skills/complex-concept-visual-explainer/examples/`: reviewed domain examples
+  that ship with the portable skill package.
 - `skills/complex-concept-visual-explainer/evals/`: evaluation prompts and the
   dependency-free token-check runner (`evaluate_outputs.py`).
 

@@ -320,6 +320,8 @@ default:
   domain without changing the generic visual core.
 - **`references/hydrocnhs-adapter.md`** - HydroCNHS vocabulary, interface
   boundary, non-claims, and reservoir-specific acceptance checks.
+- **`examples/hydrocnhs/`** - reviewed two-lane reference artifact and handoff
+  record for the HydroCNHS rule-based versus LLM decision case.
 - **`evals/`** - dependency-free text smoke tests for the reusable principles.
 
 ## Minimal deliverable
