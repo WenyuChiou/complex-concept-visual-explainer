@@ -1,0 +1,3 @@
+Keep a fixed observation and action contract with a rule-based option and Gemma 4:12B option.
+The reservoir uses an in-process callback, a validator, and unchanged downstream routing.
+The visual may show release_cms with plain-language labels.

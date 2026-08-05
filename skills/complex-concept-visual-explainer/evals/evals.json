@@ -30,6 +30,36 @@
       "must_include": ["context", "state", "observation", "rule-based", "LLM-driven", "action", "outcome", "feedback"],
       "must_not_include": ["reservoir", "routing", "subbasin", "HydroCNHS"],
       "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 4,
+      "eval_name": "agent-interface-taxonomy",
+      "prompt": "Explain a coupled model architecture and explicitly distinguish the ABM agent from its rule or LLM decision mechanism, action interface, validator, knowledge retriever, and deterministic model. Include a short role map and a semantic quality checklist.",
+      "expected_output": "A role-first visual plan that identifies the agent boundary and prevents an API, validator, retriever, or physical model from being presented as an agent.",
+      "files": [],
+      "must_include": ["ABM agent", "decision mechanism", "interface", "validator", "retriever", "deterministic model", "quality checklist"],
+      "must_not_include": ["API is the agent", "retriever is the agent"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 5,
+      "eval_name": "existing-versus-llm-two-lane",
+      "prompt": "Create a professor-facing comparison diagram with an upper existing rule-based path and a lower LLM integration path. Show an ABM Dam Agent in each alternative, a shared Reservoir Decision Interface, and unchanged deterministic routing. Mark Existing, MVP, and Future extension status explicitly.",
+      "expected_output": "Two visually separated lanes with equal status, a shared interface, and no implication that the old and new policies are nested or simultaneously active.",
+      "files": [],
+      "must_include": ["EXISTING PATH", "LLM INTEGRATION PATH", "ABM AGENT", "shared interface", "Existing", "MVP", "Future extension"],
+      "must_not_include": ["rule-based policy is inside the LLM", "Dam API is an agent"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 6,
+      "eval_name": "rag-policy-grounding",
+      "prompt": "Add an optional document-grounded policy path to an LLM decision diagram. Show an operating manual, RAG retriever, policy context, and the LLM-driven decision. Keep RAG outside the rule-based alternative, mark it as a future extension, and state that it is knowledge support rather than an agent.",
+      "expected_output": "A clear operating manual -> retriever -> policy context -> LLM decision path with no implication that retrieval changes model weights or directly performs physical control.",
+      "files": [],
+      "must_include": ["operating manual", "RAG retriever", "policy context", "LLM-driven decision", "future extension", "knowledge support", "not an agent"],
+      "must_not_include": ["RAG controls release directly", "document is written into model weights", "RAG connects to rule-based decision"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
     }
   ]
 }

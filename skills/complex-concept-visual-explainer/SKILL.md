@@ -1,7 +1,8 @@
 ---
 name: complex-concept-visual-explainer
-description: Design, generate, revise, and quality-check coherent visual explanations for complex systems, workflows, agents, decision processes, and model architectures. Use whenever a user asks for an overview-to-zoom diagram, cartoon diagram, infographic, presentation visual, or a comparison of rule-based and LLM-driven behavior, including hydrology, urban water, consumer behavior, and other coupled systems.
+description: This skill should be used when the user asks to "explain a complex system visually", "create a workflow diagram", "compare rule-based and LLM-driven decisions", "design a presentation visual", or requests an overview-to-zoom diagram, infographic, or architecture visual for hydrology, urban water, consumer behavior, or another coupled system.
 compatibility: Requires Codex built-in image generation, local image inspection, and filesystem access. Use project-local assets and Markdown documentation; no external network is required.
+version: 0.2.0
 ---
 
 # Complex Concept Visual Explainer
@@ -10,6 +11,36 @@ Use this skill to turn a complex idea into a small, coherent visual story that
 a non-specialist can follow. The output is an auditable mapping from context to
 observation, decision, action, system consequence, and feedback - not a
 decorative collection of unrelated images.
+
+## Semantic-first workflow
+
+Treat visual design as a compilation pipeline rather than a style exercise:
+
+```text
+message -> concept map -> role/status map -> layout template
+-> rendered visual -> semantic quality check -> handoff record
+```
+
+State one sentence describing what the audience must understand. Build the
+concept map before choosing icons or colors. Classify every visible node using
+the generic role taxonomy below:
+
+| Role | Question answered |
+|---|---|
+| Context / source | Where does the process happen or what supplies knowledge? |
+| Observation / state | What does the focal component receive or know? |
+| Agent | Which software decision-maker owns the policy and action? |
+| Decision mechanism | How is the agent's action selected? |
+| Knowledge support | Which document or retrieved context informs a decision? |
+| Action / contract | What structured output crosses the boundary? |
+| Interface | How does another component call or receive the action? |
+| Deterministic model | Which physical or system transformation remains outside policy? |
+| Outcome / feedback | What changes downstream or returns to the next step? |
+| Constraint / validator | What is bounded, checked, or safety-critical? |
+
+Assign implementation status independently from role. Use explicit labels such
+as `Existing`, `MVP`, `Future extension`, and `Optional`; do not rely on color
+alone to communicate status.
 
 ## Core method
 
@@ -59,7 +90,7 @@ The label map must record which audience level was used. Never mix technical
 identifiers into a general visual merely because they are available in source
 code.
 
-## Decision mechanisms
+## Decision mechanisms and comparison layout
 
 When comparing policies, show them as two parallel alternatives with equal
 visual status:
@@ -75,10 +106,38 @@ Both converge at the same action contract:
 rule-based agent OR LLM-driven agent -> shared action contract -> system model
 ```
 
+For an existing-versus-replacement comparison, prefer two separated lanes:
+
+```text
+upper lane: Existing rule-based path
+lower lane: LLM integration path
+shared right side: interface -> deterministic model -> downstream outcome
+```
+
+Put the ABM agent boundary around the decision mechanism and its action
+handling. Label the policy, interface, validator, knowledge retriever, and
+physical model separately. A `Dam API`, callback, or interface is not an agent.
 Do not draw the rule-based policy as a child of the LLM. Do not imply that an
 LLM is the physical solver, state-transition model, routing engine, or safety
 validator. The LLM proposes a policy action; the deterministic system applies
 and validates it.
+
+## External knowledge and RAG
+
+Represent document-grounded decisions as a knowledge-support path, not as a
+second agent:
+
+```text
+operating document -> retriever -> policy context -> LLM-driven decision
+```
+
+Keep the path connected only to the LLM-driven branch when rule-based and
+LLM-driven alternatives are being compared. Show a current observation as a
+retrieval query only when the arrow can be routed unambiguously to the
+retriever. Treat embedding as a retrieval implementation detail; do not imply
+that the document is written into model weights. Mark document version,
+effective date, or evidence identifiers in technical handoff notes when they
+matter to the claim.
 
 ## Smallest useful visual family
 
@@ -109,10 +168,11 @@ Write one sentence:
 Record the audience's assumed background. Define the physical or operational
 context before introducing ABM, API, LLM, or model names.
 
-### 2. Set boundary and hierarchy
+### 2. Set boundary, hierarchy, roles, and status
 
 Identify the environment, largest context, nested units, focal component,
-upstream causes, downstream consequences, and external constraints. Show the
+upstream causes, downstream consequences, and external constraints. Assign
+each node a generic role and implementation status before drawing. Show the
 focal component with a stable anchor such as a halo or dashed zoom box.
 
 ### 3. Build the content map
@@ -134,13 +194,18 @@ Before prompting, fill these fields:
 List exact visible labels verbatim. Do not ask the image generator to invent
 scientific labels, equations, identifiers, or API names.
 
-### 4. Generate or edit
+### 4. Select a layout and generate or edit
 
 Use the built-in image-generation tool for bitmap or cartoon diagrams. Make a
 separate call for each asset with one primary message. For a revision, inspect
 the local target first and use it as the edit reference. State the causal
 order, arrow semantics, palette, exact labels, and forbidden implications in
 the prompt.
+
+Select the smallest layout that answers the communication target. Use a
+two-lane comparison for existing-versus-new behavior, a decision zoom for
+parallel policies, a cascade for repeated upstream/downstream units, and an
+implementation seam for a replaceable policy behind a stable interface.
 
 Use an editable text-native diagram when the user requests editable shapes or
 precise text. Preserve the same content map and visual grammar.
@@ -164,16 +229,21 @@ For project-bound assets:
 
 Never leave a project-referenced image only in a generation cache.
 
-### 7. Run the quality gate
+### 7. Run the semantic and visual quality gate
 
 Confirm:
 
 - the system boundary and focal node are identifiable;
+- the actual agent is explicitly identifiable and is not confused with its
+  policy, interface, validator, retriever, or deterministic model;
 - upstream-to-downstream or causal direction is unambiguous;
 - input, state, decision mechanism, action, output, and feedback are distinct;
 - rule-based and LLM-driven branches are siblings;
 - the action contract is shared and structured;
 - the deterministic model or physical process remains separate from policy;
+- existing, MVP, and future components are explicitly distinguishable;
+- any RAG path enters only the intended decision mechanism and does not imply
+  model retraining or physical control by the language model;
 - every visible label appears in the label map and is spelled correctly;
 - the selected audience level is respected;
 - a general visual has no function calls, equations, array notation, JSON
@@ -239,6 +309,21 @@ market or social context -> consumer state -> observation or stimulus
 Do not copy hydrological terms into another domain unless the domain genuinely
 uses them.
 
+## Additional resources
+
+Consult the following files progressively rather than loading all references by
+default:
+
+- **`references/design-framework.md`** - generic role taxonomy, layout
+  patterns, visual grammar, and semantic review checklist.
+- **`references/domain-adapter-template.md`** - template for adding a new
+  domain without changing the generic visual core.
+- **`references/hydrocnhs-adapter.md`** - HydroCNHS vocabulary, interface
+  boundary, non-claims, and reservoir-specific acceptance checks.
+- **`examples/hydrocnhs/`** - reviewed two-lane reference artifact and handoff
+  record for the HydroCNHS rule-based versus LLM decision case.
+- **`evals/`** - dependency-free text smoke tests for the reusable principles.
+
 ## Minimal deliverable
 
 When a user asks for a visual explanation, return:
@@ -246,8 +331,9 @@ When a user asks for a visual explanation, return:
 1. the narrative and asset roles;
 2. the content map and parallel decision branches;
 3. generated or revised visuals at absolute project paths when requested;
-4. a label map and design record;
-5. the quality-gate result and unresolved limitations.
+4. a label map, alt text, and design record;
+5. the semantic and visual quality-gate result;
+6. unresolved domain assumptions or limitations.
 
 Do not call a visual family paper-ready solely because it looks polished;
 domain experts must review scientific interpretation and terminology.

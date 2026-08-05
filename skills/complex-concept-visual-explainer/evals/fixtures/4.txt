@@ -1,0 +1,3 @@
+Role map: an ABM agent owns the policy and action; a decision mechanism selects the action.
+An interface carries the action, a validator checks it, a retriever supplies evidence, and a deterministic model transforms state.
+Quality checklist: identify the agent boundary and keep every non-agent role separate.
