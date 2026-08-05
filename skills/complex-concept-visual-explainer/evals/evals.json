@@ -70,6 +70,16 @@
       "must_include": ["pipeline band", "card width", "whitespace", "validation step", "deterministic transformation", "downstream output", "non-crossing arrows", "separate right-side column"],
       "must_not_include": ["four stages in a narrow strip", "shrink the text to fit"],
       "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 8,
+      "eval_name": "directional-convergence",
+      "prompt": "Revise a technical architecture diagram with two sibling decision branches that produce one shared action followed by a sequential downstream chain. Establish one primary reading direction. Place the shared action at a visible convergence point before the chain, connect both branch outputs directly to it, and continue the downstream chain in the same direction. Use one deliberate clockwise or counter-clockwise orthogonal turn only if a turn is necessary; do not route through a sibling branch or let a branch arrow land in a later stage.",
+      "expected_output": "A directional layout specification with a visible convergence point, direct branch-to-action arrows, one primary reading direction, and a downstream chain that does not receive branch arrows in the middle.",
+      "files": [],
+      "must_include": ["primary reading direction", "shared action", "convergence point", "direct branch-to-action arrows", "downstream chain", "same direction", "non-crossing arrows", "prevent any branch arrow from entering a later stage"],
+      "must_not_include": ["branch passes through sibling", "branch arrow lands in the middle", "branch arrow lands in a later stage", "competing reading paths"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
     }
   ]
 }

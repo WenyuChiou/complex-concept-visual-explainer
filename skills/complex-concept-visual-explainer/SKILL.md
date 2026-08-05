@@ -130,6 +130,15 @@ card widths, internal padding, visible gaps, and orthogonal non-crossing arrows;
 move outcome cards to a separate right-side column when needed. Change the
 layout before reducing text size.
 
+Apply a directional-convergence rule: establish one primary reading direction
+before placing arrows. When sibling decision branches produce a shared action,
+place that action at a visible convergence point before the downstream chain.
+Route each branch directly to that point; never route a branch through a sibling
+branch or panel, and never let a branch arrow land in the middle of a later
+downstream stage. Continue the deterministic chain in the same direction. If a
+turn is necessary, use one deliberate clockwise or counter-clockwise
+orthogonal turn rather than several competing reading paths.
+
 ## External knowledge and RAG
 
 Represent document-grounded decisions as a knowledge-support path, not as a
@@ -251,6 +260,8 @@ Confirm:
 - the deterministic model or physical process remains separate from policy;
 - a downstream chain with three or more stages has a dedicated band or second
   row rather than compressed cards;
+- one primary reading direction is obvious, sibling branches route directly to
+  the convergence point, and no branch arrow enters a later stage;
 - existing, MVP, and future components are explicitly distinguishable;
 - any RAG path enters only the intended decision mechanism and does not imply
   model retraining or physical control by the language model;

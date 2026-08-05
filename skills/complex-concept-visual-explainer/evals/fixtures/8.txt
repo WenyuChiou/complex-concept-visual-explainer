@@ -1,0 +1,1 @@
+Use one primary reading direction: both sibling branches connect with direct branch-to-action arrows to a visible shared action convergence point, then continue through the downstream chain in the same direction. Use one deliberate orthogonal turn if needed, keep non-crossing arrows, and prevent any branch arrow from entering a later stage.

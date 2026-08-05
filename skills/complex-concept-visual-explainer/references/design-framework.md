@@ -107,6 +107,17 @@ downstream outcome cards in a separate right-side column when they would
 otherwise compete for space with the pipeline. If the labels only remain
 legible by shrinking type, change the layout rather than shrinking the text.
 
+### Directional continuity and convergence
+
+Choose one primary reading direction before routing arrows. When sibling
+decision branches produce a shared action, place that action at an explicit
+convergence point before the downstream chain. Connect each branch directly to
+the convergence point; do not route a branch through another branch or panel,
+and do not land a branch arrow in the middle of a later stage. Continue the
+downstream chain in the same direction. If a turn is necessary, use one
+deliberate clockwise or counter-clockwise orthogonal turn rather than several
+competing reading paths.
+
 ## External knowledge and RAG
 
 Represent document grounding as a knowledge-support path:
@@ -173,7 +184,9 @@ Before accepting a visual, verify:
 9. Can the shared interface support the alternative policy implementation?
 10. If three or more stages follow the shared action, are they given a
     dedicated band or second row instead of a compressed strip?
-11. Does the figure avoid claims stronger than the domain sources support?
+11. Do sibling branches converge before the downstream chain, with one obvious
+    primary reading direction and no branch arrow entering a later stage?
+12. Does the figure avoid claims stronger than the domain sources support?
 
 ## Handoff record
 
