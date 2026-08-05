@@ -1,0 +1,1 @@
+Use a dedicated pipeline band with generous whitespace and readable card width: action -> validation step -> deterministic transformation -> downstream output. Keep non-crossing arrows and place the downstream output in a separate right-side column. Reallocate the layout when labels need more room.

@@ -60,6 +60,16 @@
       "must_include": ["operating manual", "RAG retriever", "policy context", "LLM-driven decision", "future extension", "knowledge support", "not an agent"],
       "must_not_include": ["RAG controls release directly", "document is written into model weights", "RAG connects to rule-based decision"],
       "evaluator": {"type": "token_checks", "input": "generated_text"}
+    },
+    {
+      "id": 7,
+      "eval_name": "downstream-pipeline-density",
+      "prompt": "Revise a technical architecture diagram whose shared action feeds a validation step, a deterministic transformation, a downstream process, and an outcome. For this evaluation, use a spacious dedicated pipeline band instead of compressing the four stages into a narrow strip. Keep causal arrows readable, place the outcome in a separate right-side column, and preserve the distinction between the policy and deterministic downstream model.",
+      "expected_output": "A layout specification that treats whitespace and card width as semantic requirements, with a dedicated pipeline band and separate right-side outcome placement.",
+      "files": [],
+      "must_include": ["pipeline band", "card width", "whitespace", "validation step", "deterministic transformation", "downstream output", "non-crossing arrows", "separate right-side column"],
+      "must_not_include": ["four stages in a narrow strip", "shrink the text to fit"],
+      "evaluator": {"type": "token_checks", "input": "generated_text"}
     }
   ]
 }

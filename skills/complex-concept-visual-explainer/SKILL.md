@@ -122,6 +122,14 @@ LLM is the physical solver, state-transition model, routing engine, or safety
 validator. The LLM proposes a policy action; the deterministic system applies
 and validates it.
 
+Apply a downstream-density rule: when the shared action is followed by three
+or more sequential stages, give those stages a dedicated pipeline band or a
+second row. Do not squeeze validation, deterministic transformation,
+downstream process, and outcome cards into a narrow strip. Preserve readable
+card widths, internal padding, visible gaps, and orthogonal non-crossing arrows;
+move outcome cards to a separate right-side column when needed. Change the
+layout before reducing text size.
+
 ## External knowledge and RAG
 
 Represent document-grounded decisions as a knowledge-support path, not as a
@@ -241,6 +249,8 @@ Confirm:
 - rule-based and LLM-driven branches are siblings;
 - the action contract is shared and structured;
 - the deterministic model or physical process remains separate from policy;
+- a downstream chain with three or more stages has a dedicated band or second
+  row rather than compressed cards;
 - existing, MVP, and future components are explicitly distinguishable;
 - any RAG path enters only the intended decision mechanism and does not imply
   model retraining or physical control by the language model;

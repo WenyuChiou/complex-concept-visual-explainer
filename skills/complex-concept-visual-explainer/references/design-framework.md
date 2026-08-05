@@ -96,6 +96,17 @@ and downstream input when an interface or routing step changes meaning.
 Show the stable interface, replaceable policy, validation, fallback, audit log,
 and unchanged simulator. Use for engineering discussions about integration.
 
+### Density and pipeline layout
+
+Do not compress a long sequential chain into a narrow horizontal strip. When a
+shared action is followed by three or more downstream stages, allocate a
+dedicated pipeline band, a second row, or a separate implementation-seam
+figure. Give each stage a readable card width, internal padding, and visible
+gaps; preserve the causal order with orthogonal, non-crossing arrows. Keep
+downstream outcome cards in a separate right-side column when they would
+otherwise compete for space with the pipeline. If the labels only remain
+legible by shrinking type, change the layout rather than shrinking the text.
+
 ## External knowledge and RAG
 
 Represent document grounding as a knowledge-support path:
@@ -160,7 +171,9 @@ Before accepting a visual, verify:
 7. Does any RAG path enter only the intended decision mechanism?
 8. Does the deterministic model remain outside the policy boundary?
 9. Can the shared interface support the alternative policy implementation?
-10. Does the figure avoid claims stronger than the domain sources support?
+10. If three or more stages follow the shared action, are they given a
+    dedicated band or second row instead of a compressed strip?
+11. Does the figure avoid claims stronger than the domain sources support?
 
 ## Handoff record
 
