@@ -1,8 +1,9 @@
 ---
 name: complex-concept-visual-explainer
 description: This skill should be used when the user asks to "explain a complex system visually", "create a workflow diagram", "compare rule-based and LLM-driven decisions", "design a presentation visual", or requests an overview-to-zoom diagram, infographic, or architecture visual for hydrology, urban water, consumer behavior, or another coupled system.
-compatibility: Requires Codex built-in image generation, local image inspection, and filesystem access. Use project-local assets and Markdown documentation; no external network is required.
-version: 0.2.0
+metadata:
+  compatibility: Requires Codex built-in image generation, local image inspection, and filesystem access. Use project-local assets and Markdown documentation; no external network is required.
+  version: 0.3.0
 ---
 
 # Complex Concept Visual Explainer
@@ -89,6 +90,20 @@ user explicitly asks for implementation notation.
 The label map must record which audience level was used. Never mix technical
 identifiers into a general visual merely because they are available in source
 code.
+
+Every visible card, caption, or key must answer a distinct reader question
+about an input, transformation, setting, comparison, or output. Replace vague
+or redundant category text with its specific function, or remove it. Deliver
+the assembled figure and editable source with the separate generated artwork
+layers so a user can change both wording and illustrations.
+
+For a general audience, stage the visual as **what enters → what changes it →
+what comes out**. Put an unfamiliar model's full name and abbreviation together
+beside its plain-language job; do not show the abbreviation alone anywhere in
+the visible figure unless the audience explicitly knows it. The primary route
+must be traceable without a presenter or a long legend. Distinguish an
+observation/calibration comparison from physical flow. Record audience-test
+uncertainty instead of claiming a novice understood without testing.
 
 ## Decision mechanisms and comparison layout
 
@@ -213,25 +228,40 @@ scientific labels, equations, identifiers, or API names.
 
 ### 4. Select a layout and generate or edit
 
-Use the built-in image-generation tool for bitmap or cartoon diagrams. Make a
-separate call for each asset with one primary message. For a revision, inspect
-the local target first and use it as the edit reference. State the causal
-order, arrow semantics, palette, exact labels, and forbidden implications in
-the prompt.
+Assign ownership before generating: image generation supplies text-free
+illustrations; the editable source owns exact labels, arrows, connectors and
+data-derived boundaries. Make a separate built-in image-generation call for
+each needed illustration. Leave blank space for labels, and never request
+lettering that will later be hidden under an opaque strip or redrawn. For a
+bitmap-only deliverable, a full generated composition is still possible, but
+inspect every visible word and scientific relation. For a revision, inspect
+the existing figure first and retain it for a matched old/new comparison.
+State the causal order, visual roles and forbidden implications in the prompt.
 
 Select the smallest layout that answers the communication target. Use a
 two-lane comparison for existing-versus-new behavior, a decision zoom for
 parallel policies, a cascade for repeated upstream/downstream units, and an
 implementation seam for a replaceable policy behind a stable interface.
 
-Use an editable text-native diagram when the user requests editable shapes or
-precise text. Preserve the same content map and visual grammar.
+Use an editable text-native composition when the user requests editable shapes
+or precise text. Generated illustrations may remain independent movable image
+objects; labels and arrows must be native editable objects. Use real GIS/data
+geometry where spatial accuracy matters; never present invented illustration
+as a delineated watershed map. Preserve the same content map and visual grammar.
+Use PowerPoint for a slide the user must revise, draw.io for a reusable
+flowchart, or GIS source for a map. Computer use may verify behavior in the
+actual editor; GUI clicking is not required for authoring when structured
+source creation is more reproducible. Edit a label, image, and connector,
+save, reopen and inspect before claiming editability.
 
 ### 5. Inspect and iterate
 
-Inspect every output at full resolution and at intended slide scale. Check
+Inspect every output at full resolution and at every actual delivery scale,
+including notebook or document width when relevant. Check
 composition, spelling, arrow direction, branch structure, label legibility,
-domain claims, and the boundary between policy and simulator. Make targeted
+domain claims, opaque seams, crop, overlap, and the boundary between policy
+and simulator. If labels are too small, remove detail or move it to an adjacent
+table rather than shrinking the type. Make targeted
 revisions rather than accepting an attractive but semantically wrong figure.
 
 ### 6. Promote and document
@@ -245,6 +275,8 @@ For project-bound assets:
   runtime path.
 
 Never leave a project-referenced image only in a generation cache.
+Keep the previous accepted figure until the candidate has been compared at
+matched display sizes and the user has approved replacement when requested.
 
 ### 7. Run the semantic and visual quality gate
 
@@ -272,6 +304,11 @@ Confirm:
 - the image is readable at presentation scale;
 - no unsupported scientific or software claim was introduced.
 
+Then score the rendered candidate with the short rubric in
+`references/visual-quality-rubric.md` at each intended viewing size. Keep an
+accepted figure unchanged while an applicable gate fails or is unverified;
+automated text and package tests cannot certify layout or comprehension.
+
 For a technical visual, verify that every non-plain identifier is on the
 explicit whitelist and is necessary for the stated contract.
 
@@ -286,17 +323,26 @@ Use a wide presentation layout unless the user specifies another format.
 - Use one bottom callout for the main takeaway.
 - Use line style, shape, and labels in addition to color.
 
-Suggested semantic roles:
+Suggested semantic roles (muted Japanese-inspired category colors, not a
+background prescription; maintain sufficient contrast and distinguish by
+label/shape as well as hue):
 
 | Role | Color |
 |---|---|
-| Natural, material, or data flow | Blue |
-| Deterministic transformation or model | Teal |
-| Agent, policy, or LLM | Purple |
-| Action or intervention | Orange |
-| Validation, risk, or constraint | Red |
+| Natural, material, or data flow | Soft indigo or river blue |
+| Deterministic transformation or model | Muted blue-green |
+| Agent, policy, or LLM | Warm sumi gray |
+| Action or intervention | Ochre or persimmon |
+| Validation, risk, or constraint | Deep vermilion, used sparingly |
 
 Do not use color as the only carrier of meaning.
+For hydrology and regionalized-model figures, use the quieter
+[Nippon Colors](https://nipponcolors.com/) category family: local
+forcing/state AINEZUMI `#566C73`, regionalized parameters RIKYUCHA
+`#897D55`, calibrated model parameters NAMAKABE `#7D6C46`, calibrated
+routing GINSUSUTAKE `#82663A`, observed reference SUMI `#1C1C1C`, and
+simulated output RIKYUNEZUMI `#707C74`. Keep the categories legible in
+grayscale with exact labels or line patterns; do not tint the whole background.
 
 ## Prompt template
 
@@ -308,10 +354,13 @@ Audience level: general explanatory OR professor-facing engineering
 System boundary: what remains inside the deterministic model
 Causal order: context -> observation/state -> decision -> structured action
 -> deterministic transformation -> output -> feedback
-Style: flat vector, modular GitHub learning-project style, generous whitespace
+Style: calm Japanese-inspired muted category colors, restrained contrast,
+generous whitespace; reserve text-free areas for editable native labels
 Composition: overview, zoom, cascade, or implementation seam
-Text (verbatim): exact labels only; do not invent identifiers
-Color semantics: blue flow, teal model, purple policy, orange action, red validation
+Text: no image-generated lettering when editable labels are needed; exact labels
+belong to the native layer; define abbreviations beside first use
+Color semantics: muted river blue flow, blue-green model, subdued neutral policy,
+ochre action, sparing deep vermilion validation
 Constraints: keep policy separate from physics; preserve arrow direction
 Avoid: clutter, tiny text, unsupported claims, function calls, equations, code glyphs
 ```
@@ -337,6 +386,8 @@ default:
 
 - **`references/design-framework.md`** - generic role taxonomy, layout
   patterns, visual grammar, and semantic review checklist.
+- **`references/visual-quality-rubric.md`** - five small release gates for
+  meaning, novice language, layout, editability, and replacement evidence.
 - **`references/domain-adapter-template.md`** - template for adding a new
   domain without changing the generic visual core.
 - **`references/hydrocnhs-adapter.md`** - HydroCNHS vocabulary, interface
