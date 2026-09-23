@@ -1,0 +1,18 @@
+name: Skill evaluations
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  smoke-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Existing skill evaluation fixtures
+        run: python skills/complex-concept-visual-explainer/evals/run_all.py
+      - name: Layered editable-delivery rules
+        run: python skills/complex-concept-visual-explainer/evals/test_layered_delivery_rules.py
